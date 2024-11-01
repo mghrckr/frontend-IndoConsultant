@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 
@@ -16,42 +17,54 @@ import OurTeam from "./pages/team";
 import Contact from "./pages/contact";
 import Layout from "./components/layout";
 import ScrollToTop from "./components/scroll-to-top";
+import { Content } from "./pages/news/content";
+import store from "./store";
+import { NewsTable } from "./pages/admin/newsTable";
+import { Login } from "./pages/admin/login";
+import { PortfolioTable } from "./pages/admin/portfolioTable";
 
 const App = () => {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
+      <Provider store={store}>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/newsTable" element={<NewsTable />} />
+            <Route path="/portfolioTable" element={<PortfolioTable />} />
 
-            <Route path="/about-us" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route
-              path="/pemeriksaan-dan-penilaian-tingkat-komponen-dalam-negeri"
-              element={<PemeriksaanDanPenilaianTingkatKomponenDalamNegeri />}
-            />
-            <Route
-              path="/pemeriksaan-dan-penilaian-penerapan-sistem-manajemen-keselamatan-ketenagalistrikan"
-              element={<SistemManajemenKeselamatanKetengalistrikan />}
-            />
-            <Route
-              path="/pengelolaan-lingkungan-ketenagalistrikan"
-              element={<PengelolaanLingkunganKetenagalistrikan />}
-            />
-            <Route path="/green-house-gas" element={<GreenHouseGas />} />
-            <Route
-              path="/pemeriksaan-dan-penilaian-kompensasi-tanah"
-              element={<SurveyMapping />}
-            />
-            <Route path="/portofolio" element={<Portofolio />} />
-            <Route path="/team" element={<OurTeam />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/contact" element={<Contact />} />
-          </Route>
-        </Routes>
-      </Router>
-      <ScrollToTop />
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+
+              <Route path="/about-us" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route
+                path="/pemeriksaan-dan-penilaian-tingkat-komponen-dalam-negeri"
+                element={<PemeriksaanDanPenilaianTingkatKomponenDalamNegeri />}
+              />
+              <Route
+                path="/pemeriksaan-dan-penilaian-penerapan-sistem-manajemen-keselamatan-ketenagalistrikan"
+                element={<SistemManajemenKeselamatanKetengalistrikan />}
+              />
+              <Route
+                path="/pengelolaan-lingkungan-ketenagalistrikan"
+                element={<PengelolaanLingkunganKetenagalistrikan />}
+              />
+              <Route path="/green-house-gas" element={<GreenHouseGas />} />
+              <Route
+                path="/pemeriksaan-dan-penilaian-kompensasi-tanah"
+                element={<SurveyMapping />}
+              />
+              <Route path="/portofolio" element={<Portofolio />} />
+              <Route path="/team" element={<OurTeam />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/content/:id" element={<Content />} />
+            </Route>
+          </Routes>
+        </Router>
+        <ScrollToTop />
+      </Provider>
     </>
   );
 };

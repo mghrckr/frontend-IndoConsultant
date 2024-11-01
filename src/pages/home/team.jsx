@@ -1,122 +1,161 @@
-import putut_widodo_image from "../../assets/images/team/putut-widodo.jpg";
-import e_kurniawan_image from "../../assets/images/team/e-kurniawan.jpg";
-import { Link } from "react-router-dom";
-
-const people = [
-  {
-    name: "Daud",
-    role: "Direktur Keuangan",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-    xUrl: "#",
-    linkedinUrl: "#",
-  },
-  {
-    name: "Sanny Wicaksono",
-    role: "Direktur Utama",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-    xUrl: "#",
-    linkedinUrl: "#",
-  },
-  {
-    name: "Putut Widodo",
-    role: "Direktur Operasional",
-    imageUrl: putut_widodo_image,
-    xUrl: "#",
-    linkedinUrl: "#",
-  },
-  {
-    name: "E Kurniawan",
-    role: "Direktur Pengembangan Bisnis & Riset",
-    imageUrl: e_kurniawan_image,
-    xUrl: "#",
-    linkedinUrl: "#",
-  },
-  // More people...
-];
 
 export default function Team() {
   return (
-    <div className="bg-white py-24">
-      <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="mt-4 text-lg leading-8 text-gray-600">
-            Our Best Team
-          </h2>
-          <p className=" text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Core Director
-          </p>
+    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div className="flex flex-col lg:flex-row justify-between">
+        <div className="lg:w-7/12 text-center lg:text-left">
+          <div className="title-area">
+            <span className="sub-title animate-fadeInLeft" style={{ animationDelay: ".3s" }}>
+              OUR BEST TEAM
+            </span>
+            <h2 className="sec-title animate-fadeInLeft" style={{ animationDelay: ".4s" }}>
+              Core Director
+            </h2>
+          </div>
         </div>
-        <ul
-          role="list"
-          className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-4"
+        <div
+          className="lg:w-5/12 text-center lg:text-right self-center animate-fadeInRight"
+          style={{ animationDelay: ".9s" }}
         >
-          {people.map((person) => (
-            <li key={person.name}>
-              <img
-                alt=""
-                src={person.imageUrl}
-                className="mx-auto h-56 w-56 rounded-full"
-              />
-              <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
-                {person.name}
-              </h3>
-              <p className="text-sm leading-6 text-gray-600">{person.role}</p>
-              <ul role="list" className="mt-6 flex justify-center gap-x-6">
-                <li>
-                  <a
-                    href={person.xUrl}
-                    className="text-gray-400 hover:text-gray-500"
-                  >
-                    <span className="sr-only">X</span>
-                    <svg
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                    >
-                      <path d="M11.4678 8.77491L17.2961 2H15.915L10.8543 7.88256L6.81232 2H2.15039L8.26263 10.8955L2.15039 18H3.53159L8.87581 11.7878L13.1444 18H17.8063L11.4675 8.77491H11.4678ZM9.57608 10.9738L8.95678 10.0881L4.02925 3.03974H6.15068L10.1273 8.72795L10.7466 9.61374L15.9156 17.0075H13.7942L9.57608 10.9742V10.9738Z" />
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={person.linkedinUrl}
-                    className="text-gray-400 hover:text-gray-500"
-                  >
-                    <span className="sr-only">LinkedIn</span>
-                    <svg
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                    >
-                      <path
-                        d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"
-                        clipRule="evenodd"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          ))}
-        </ul>
-        {/* <Link
-          className="px-4 py-3 bg-[#265093] rounded-lg hover:bg-[#1f427a]"
-          to="/team"
-        >
-          Explore Our Team
-        </Link> */}
-        <div className="mt-24">
-          <Link
-            to="/team"
-            className="px-6 py-2 font-medium bg-[#1f427a] text-white w-fit transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
-          >
-            Explore Our Team
-          </Link>
+          <a href="/team" className="btn style4 mb-12 lg:mb-0">
+            Explore Our Team <i className="fas fa-angle-double-right" />
+          </a>
+        </div>
+      </div>
+      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <div className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
+            <img
+              className="object-cover w-full h-56 md:h-64 xl:h-80"
+              src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
+              alt="Person"
+            />
+            <div className="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
+              <p className="mb-1 text-lg font-bold text-gray-100">
+                Daud
+              </p>
+              <p className="mb-4 text-xs text-gray-100">Direktur Keuangan</p>
+              <div className="flex items-center justify-center space-x-3">
+                <a
+                  href="/"
+                  className="text-white transition-colors duration-300 hover:text-teal-accent-400"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                    <path d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z" />
+                  </svg>
+                </a>
+                <a
+                  href="/"
+                  className="text-white transition-colors duration-300 hover:text-teal-accent-400"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                    <path d="M22,0H2C0.895,0,0,0.895,0,2v20c0,1.105,0.895,2,2,2h11v-9h-3v-4h3V8.413c0-3.1,1.893-4.788,4.659-4.788 c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.795,0.715-1.795,1.763V11h4.44l-1,4h-3.44v9H22c1.105,0,2-0.895,2-2 V2C24,0.895,23.105,0,22,0z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
+            <img
+              className="object-cover w-full h-56 md:h-64 xl:h-80"
+              src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+              alt="Person"
+            />
+            <div className="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
+              <p className="mb-1 text-lg font-bold text-gray-100">
+                Sanny Wicaksono
+              </p>
+              <p className="mb-4 text-xs text-gray-100">Direktur Utama</p>
+              <div className="flex items-center justify-center space-x-3">
+                <a
+                  href="/"
+                  className="text-white transition-colors duration-300 hover:text-teal-accent-400"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                    <path d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z" />
+                  </svg>
+                </a>
+                <a
+                  href="/"
+                  className="text-white transition-colors duration-300 hover:text-teal-accent-400"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                    <path d="M22,0H2C0.895,0,0,0.895,0,2v20c0,1.105,0.895,2,2,2h11v-9h-3v-4h3V8.413c0-3.1,1.893-4.788,4.659-4.788 c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.795,0.715-1.795,1.763V11h4.44l-1,4h-3.44v9H22c1.105,0,2-0.895,2-2 V2C24,0.895,23.105,0,22,0z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col h-full">
+          <div className="relative flex-grow overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl h-full">
+            <img
+              className="object-cover w-full h-full"
+              src="/putut-widodo.jpg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+              alt="Person"
+              style={{ height: '100%' }}
+            />
+            <div className="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
+              <p className="mb-1 text-lg font-bold text-gray-100">
+                Putut Widodo
+              </p>
+              <p className="mb-4 text-xs text-gray-100">Direktur Operasional</p>
+              <div className="flex items-center justify-center space-x-3">
+                <a
+                  href="/"
+                  className="text-white transition-colors duration-300 hover:text-teal-accent-400"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                    <path d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z" />
+                  </svg>
+                </a>
+                <a
+                  href="/"
+                  className="text-white transition-colors duration-300 hover:text-teal-accent-400"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                    <path d="M22,0H2C0.895,0,0,0.895,0,2v20c0,1.105,0.895,2,2,2h11v-9h-3v-4h3V8.413c0-3.1,1.893-4.788,4.659-4.788 c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.795,0.715-1.795,1.763V11h4.44l-1,4h-3.44v9H22c1.105,0,2-0.895,2-2 V2C24,0.895,23.105,0,22,0z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col h-full">
+          <div className="relative flex-grow overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl h-full">
+            <img
+              className="object-cover w-full h-full"
+              src="/e-kurniawan.jpg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+              alt="Person"
+              style={{ height: '100%' }}
+            />
+            <div className="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
+              <p className="mb-1 text-lg font-bold text-gray-100">
+                E Kurniawan
+              </p>
+              <p className="mb-4 text-xs text-gray-100">Direktur Pengembangan Bisnis & Riset</p>
+              <div className="flex items-center justify-center space-x-3">
+                <a
+                  href="/"
+                  className="text-white transition-colors duration-300 hover:text-teal-accent-400"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                    <path d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z" />
+                  </svg>
+                </a>
+                <a
+                  href="/"
+                  className="text-white transition-colors duration-300 hover:text-teal-accent-400"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                    <path d="M22,0H2C0.895,0,0,0.895,0,2v20c0,1.105,0.895,2,2,2h11v-9h-3v-4h3V8.413c0-3.1,1.893-4.788,4.659-4.788 c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.795,0.715-1.795,1.763V11h4.44l-1,4h-3.44v9H22c1.105,0,2-0.895,2-2 V2C24,0.895,23.105,0,22,0z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,150 +1,95 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
-import hero from "../../assets/images/services/hero-bg-services-2.jpg";
-import CustomBreadcrumb from "@/components/custom-breadcrumb";
-import { HiCheckBadge } from "react-icons/hi2";
-import TKDN_Image from "../../assets/images/tkdn-new.jpg";
-
-const dataVerificationofTechnicalAspects = [
-  {
-    id: 1,
-    icon: <HiCheckBadge color="#2f4f75" size={24} />,
-    desc: "Ensuring the suitability of RIB with EPC contract / Engineering Document (type, spesifications and quantity of goods)",
-  },
-  {
-    id: 2,
-    icon: <HiCheckBadge color="#2f4f75" size={24} />,
-    desc: "Ensure that the price of imported goods in the contract does not include import duties",
-  },
-  {
-    id: 3,
-    icon: <HiCheckBadge color="#2f4f75" size={24} />,
-    desc: "Ensure goods have not been produced domestically in accordance with regulations Kemenin No.32/2020",
-  },
-  {
-    id: 4,
-    icon: <HiCheckBadge color="#2f4f75" size={24} />,
-    desc: "Goods imported with facilities excluding spare parts, consumables wear (consumable) and workshop equipment (workshop tools)",
-  },
-  {
-    id: 5,
-    icon: <HiCheckBadge color="#2f4f75" size={24} />,
-    desc: "Verify goods according to HS Code (HS tariff post) based on the Book Indonesian Customs Tariff (BTKI)",
-  },
-];
 
 export default function PemeriksaanDanPenilaianTingkatKomponenDalamNegeri() {
   return (
-    <div className="bg-white">
-      <main>
-        <div className="relative isolate overflow-hidden bg-gray-900 pb-16 pt-14 sm:pb-20">
-          <div className="bg-blend-saturation">
-            <img
-              alt="Hero Image Services"
-              src={hero}
-              className="absolute inset-0 -z-10 h-full w-full object-cover"
-            />
-          </div>
-          {/* <div
-            aria-hidden="true"
-            className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-          >
-            <div
-              style={{
-                clipPath:
-                  "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-              }}
-              className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-            />
-          </div> */}
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl py-48">
-              <div className="text-center">
-                <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-                  Domestic Component Level (TKDN)
+    <>
+      <div className="breadcumb-wrapper" style={{ backgroundImage: "url('/1.service.jpeg')" }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="breadcumb-content">
+                <h1
+                  className="breadcumb-title"
+                  style={{ color: '#2B4E92' }}
+                >
+                  Pemeriksaan dan Penilaian Tingkat Komponen Dalam Negeri
                 </h1>
-                <CustomBreadcrumb
-                  currentPage="Our Service"
-                  prevPage="Home"
-                  prevHref="/"
-                />
               </div>
             </div>
-          </div>
-          <div
-            aria-hidden="true"
-            className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-          >
-            <div
-              style={{
-                clipPath:
-                  "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-              }}
-              className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-            />
           </div>
         </div>
-      </main>
-
-      {/* Content Section */}
-      <div className="overflow-hidden bg-white py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-            <div className="lg:pr-8 lg:pt-4">
-              <div className="lg:max-w-lg">
-                <p className="mt-2 text-2xl font-bold tracking-tight text-gray-900">
-                  1. Verify RIB in accordance with Minister of Finance
-                  Regulation (PMK) number No 66/PMK.010/2015 and Regulation of
-                  the Director General of Electricity No.263 K20/DJL.1/2015.
-                  Verification includes
-                </p>
-                <p className="mt-6 text-xl leading-8 text-gray-600 font-semibold">
-                  a. Administrative verification, among others :
-                </p>
-                <div className="flex gap-5 mt-2 items-start">
-                  <div>
-                    <HiCheckBadge color="#2f4f75" size={24} />
-                  </div>
-                  <p className="text-lg text-gray-600">
-                    Business Entity Name, address, NIB, IUPTL, Tax Payer
-                    Identification Number (NPWP), Power Purchase Agreement (PPA)
-                  </p>
+      </div >
+      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div className="grid gap-5 row-gap-8 lg:grid-cols-2">
+          <div className="flex flex-col justify-center">
+            <div className="max-w-xl mb-6">
+              <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
+                Kompetensi
+              </h2>
+              <p className="text-base text-gray-700 md:text-lg">
+                Pendamping self assessment TKDN merupakan tenaga ahli terlatih dan berpengalaman dengan latar belakang dari berbagai disiplin ilmu.
+              </p>
+            </div>
+            <div className="grid gap-5 row-gap-8 sm:grid-cols-2">
+              <div className="bg-white border-l-4 shadow-lg border-purple-500 rounded-lg overflow-hidden">
+                <div className="p-6 border-l border-gray-100 rounded-r">
+                  <h6 className="mb-4 text-lg font-bold text-purple-600">
+                    Kami memberikan layanan self-assessment Tingkat Komponen Dalam Negeri (TKDN) meliputi:
+                  </h6>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li className="flex items-center">
+                      <span className="mr-2 text-purple-500">•</span> Produk Elektronika dan Telematika
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2 text-purple-500">•</span> Produk Telepon Seluler, Komputer Genggam, dan Komputer Tablet
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2 text-purple-500">•</span> Produk Alat Kesehatan dan Alat Kesehatan Diagnostik In Vitro
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2 text-purple-500">•</span> Produk Logam dan Barang Logam
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2 text-purple-500">•</span> Produk Bahan Bangunan
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2 text-purple-500">•</span> Bahan Kimia dan Barang Kimia
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2 text-purple-500">•</span> Barang Teknik Lainnya
+                    </li>
+                  </ul>
                 </div>
-                <p className="mt-6 text-xl leading-8 text-gray-600 font-semibold">
-                  b. Verification of Technical Aspects, among others :
-                </p>
-                <div className="flex flex-col gap-2 mt-2">
-                  {dataVerificationofTechnicalAspects.map((item) => (
-                    <ul key={item.id}>
-                      <li className="flex gap-5 items-start text-lg text-gray-600">
-                        <div>{item.icon}</div>
-                        {item.desc}
-                      </li>
-                    </ul>
-                  ))}
+              </div>
+              <div className="bg-white border-l-4 shadow-lg border-purple-500 rounded-lg overflow-hidden">
+                <div className="p-6 border-l border-gray-100 rounded-r">
+                  <h6 className="mb-4 text-lg font-bold text-purple-600">
+                    Benefit Self Assessment TKDN
+                  </h6>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li className="flex items-center">
+                      <span className="mr-2 text-purple-500">•</span> Memberikan kemampuan dan pengalaman kepada industri dalam melaksanakan perhitungan TKDN
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2 text-purple-500">•</span> Memberi kemampuan pada industri dalam memanajemen capaian TKDN sesuai target yang ditetapkan
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2 text-purple-500">•</span> Membantu Lembaga Verifikasi Independen dalam melaksanakan perhitungan TKDN
+                    </li>
+                  </ul>
                 </div>
-
-                <p className="mt-5 text-2xl font-bold tracking-tight text-gray-900">
-                  2. Issued verified RIB and RIB verification results reports
-                  for signed by the Directorate General of Electricity
-                </p>
-                <p className="mt-5 text-2xl font-bold tracking-tight text-gray-900">
-                  3. Conduct technical presentations related to RIB submissions
-                  at the Directorate General of Energy - Ministry of Energy and
-                  Mineral
-                </p>
               </div>
             </div>
+          </div>
+          <div className="flex items-center justify-center">
             <img
-              alt="TKDN Image"
-              src={TKDN_Image}
-              width={2432}
-              height={1442}
-              className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
+              className="object-cover w-full h-80 rounded-lg shadow-2xl transform transition duration-300 ease-in-out hover:scale-105 lg:h-[28rem]"
+              src="https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
+              alt="Ilustrasi TKDN"
             />
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

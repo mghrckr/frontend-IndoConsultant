@@ -1,12 +1,45 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-
+import { fetchCarousels, fetchOutput, fetchPortfolios, fetchRuangLingkup } from '@/store/actionCreators';
+const BASE_URL = `http://localhost:3000`
 
 const MainPortofolio = () => {
+  const dispatch = useDispatch();
+  const portfolios = useSelector((state) => state.portfolios.portfolios);
+  const filterport = portfolios.filter((p) => p.divisi === "Survey and Mapping Division");
+  const ruangLingkup = useSelector((state) => state.ruangLingkup.ruangLingkup);
+  const output = useSelector((state) => state.output.output);
+  const carousels = useSelector((state) => state.carousels.carousels);
+  const [selectedProject, setSelectedProject] = useState(filterport[0]);
+
+
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+  };
+
+  const ruangLingkupIsi = ruangLingkup.filter(
+    (item) => item.PortfolioId === selectedProject.id
+  );
+  const filteredCarousels = carousels.filter(
+    (item) => item.PortfolioId === selectedProject.id
+  );
+  const filteredOutput = output.filter(
+    (item) => item.PortfolioId === selectedProject.id
+  );
+  console.log(filteredOutput);
+
+  useEffect(() => {
+    dispatch(fetchPortfolios());
+    dispatch(fetchRuangLingkup());
+    dispatch(fetchOutput());
+    dispatch(fetchCarousels());
+  }, [dispatch]);
+
   return (
     <div className="project-area-4 space overflow-hidden">
       <div className="container container2">
@@ -29,15 +62,13 @@ const MainPortofolio = () => {
           <div className="col-lg-12">
             <div className="project-wrap wow fadeInUp" data-wow-delay=".5s">
               <div className="project-tab-btn style3 filter-menu-active text-center">
-                <button data-filter=".cat1" type="button">
-                  <img src="/4.jpg" alt="img" />
-                </button>
-                <button data-filter=".cat2" type="button">
-                  <img src="/director.jpg" alt="img" />
-                </button>
-                <button data-filter=".cat3" type="button">
-                  <img src="e-kurniawan.jpg" alt="img" />
-                </button>
+                {filterport.slice(0, 3).map((button, index) => (
+                  <button key={button.id}
+                    onClick={() => handleProjectClick(button)}
+                    data-filter={button.filter} type="button" className="mb-2">
+                    <img src={BASE_URL + button.gambar} alt={button.altText} className="w-full rounded-lg shadow-lg" />
+                  </button>
+                ))}
               </div>
               <div className="row filter-active-cat1 gy-4">
                 <div className="col-xl-6 filter-item cat1">
@@ -46,38 +77,54 @@ const MainPortofolio = () => {
                       {/* Div kiri dengan lebar 50% */}
                       <div className="w-1/2 p-4">
                         <div className="space-y-4">
-                          <h4 className="text-lg font-bold">Jalan Tol Akses Patimban (2023)</h4>
+                          <h4 className="text-lg font-bold">{selectedProject?.judul}</h4>
                           <p>
-                            Pemetaan topografi menggunakan wahana PUNA dengan sensor LiDAR
-                            dan Foto di koridor jalan tol akses Patimban (2023)
+                            {selectedProject?.isi}
                           </p>
                           <h4 className="text-lg font-bold">Lingkup Pekerjaan</h4>
-                          <ul className="list-disc pl-5">
-                            <li>Akuisisi LiDAR dan Foto Udara</li>
-                            <li>Pengolahan data akuisisi</li>
-                          </ul>
+                          {selectedProject?.lingkupPekerjaan ? (
+                            <li>{selectedProject.lingkupPekerjaan}</li>
+                          ) : (
+                            ruangLingkupIsi.map((item, index) => <li key={index}>{item.isi}</li>)
+                          )}
                         </div>
-                        <h4 className="text-lg font-bold mb-2">Output</h4>
+                        <h4 className="text-lg font-bold mb-2 mt-2">Output</h4>
                         <div className="flex">
                           <div className="w-1/2 space-y-2">
                             <ul className="list-disc pl-5">
-                              <li>Peta Foto Udara</li>
-                              <li>DTM</li>
+                              {filteredOutput.map((item, index) => {
+                                // Jika indeks lebih besar atau sama dengan 2, pindahkan ke sisi kanan
+                                if (index < 2) {
+                                  return (
+                                    <li key={index}>{item.isi}</li>
+                                  );
+                                } else {
+                                  return null; // Tidak tampilkan jika indeks lebih dari 1 di sisi kiri
+                                }
+                              })}
                             </ul>
                           </div>
                           <div className="w-1/2 space-y-2">
                             <ul className="list-disc pl-5">
-                              <li>Peta Kontur</li>
-                              <li>Peta Tutupan Lahan</li>
+                              {filteredOutput.map((item, index) => {
+                                // Menampilkan item berikutnya di sisi kanan
+                                if (index >= 2) {
+                                  return (
+                                    <li key={index}>{item.isi}</li>
+                                  );
+                                } else {
+                                  return null; // Tidak tampilkan jika indeks kurang dari 2 di sisi kanan
+                                }
+                              })}
                             </ul>
                           </div>
                         </div>
                       </div>
                       {/* Div kanan dengan lebar 50% */}
-                      <div className="w-1/2 p-4 flex items-center justify-center h-96">
+                      <div className="w-1/2 p-4 flex items-center justify-center h-100 rounded-2xl overflow-hidden">
                         <Swiper
                           modules={[Autoplay, Pagination, Navigation]}
-                          spaceBetween={10}
+                          spaceBetween={0}  // Mengatur jarak antar slide ke 0
                           slidesPerView={1}
                           loop={true}
                           pagination={{ clickable: true }}
@@ -85,35 +132,17 @@ const MainPortofolio = () => {
                             delay: 3000,
                             disableOnInteraction: false,
                           }}
-                          className="w-full h-80 rounded-lg overflow-hidden"
+                          className="w-full h-full rounded-2xl overflow-hidden"
                         >
-                          <SwiperSlide>
-                            <div className="h-full rounded-lg overflow-hidden">
+                          {filteredCarousels.map((carousel, index) => (
+                            <SwiperSlide key={index} className="rounded-2xl overflow-hidden w-full h-full">
                               <img
-                                src="/4.jpg"
-                                alt="Image 1"
-                                className="w-full h-full object-cover rounded-lg"
+                                src={BASE_URL + carousel.gambar}
+                                alt={carousel.isi}
+                                className="w-full h-full object-cover rounded-2xl overflow-hidden" // Menggunakan `object-cover` agar gambar memenuhi seluruh slide
                               />
-                            </div>
-                          </SwiperSlide>
-                          <SwiperSlide>
-                            <div className="h-full rounded-lg overflow-hidden">
-                              <img
-                                src="/e-kurniawan.jpg"
-                                alt="Image 2"
-                                className="w-full h-full object-cover rounded-lg"
-                              />
-                            </div>
-                          </SwiperSlide>
-                          <SwiperSlide>
-                            <div className="h-full rounded-lg overflow-hidden">
-                              <img
-                                src="/director.jpg"
-                                alt="Image 3"
-                                className="w-full h-full object-cover rounded-lg"
-                              />
-                            </div>
-                          </SwiperSlide>
+                            </SwiperSlide>
+                          ))}
                         </Swiper>
                       </div>
                     </div>

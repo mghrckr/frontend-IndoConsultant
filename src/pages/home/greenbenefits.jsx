@@ -1,109 +1,117 @@
-// import {
-//   BarChart,
-//   Bar,
-//   XAxis,
-//   YAxis,
-//   Tooltip,
-//   Legend,
-//   ResponsiveContainer,
-// } from "recharts";
-// import {
-//   ComposedChart,
-//   Line,
-//   Area,
-//   Bar,
-//   XAxis,
-//   YAxis,
-//   CartesianGrid,
-//   Tooltip,
-//   Legend,
-//   ResponsiveContainer,
-// } from "recharts";
-
-import hero from "../../assets/images/hero/why-bg-2-1.svg";
-import { useEffect, useState } from "react";
-import { Progress } from "@/components/ui/progress";
-
-const stats = [
-  { id: 1, name: "Energy Use", value: 24, endValue: 50 },
-  { id: 2, name: "CO2 Emission", value: 33, endValue: 39 },
-  { id: 3, name: "Water Emission", value: 40 },
-  { id: 4, name: "Solid Waste", value: 70 },
-  { id: 5, name: "Social Risk", value: 80 },
-];
+import { useEffect, useState, useRef } from "react";
 
 export default function GreenBenefits() {
-  const [progress, setProgress] = useState("");
+  const [progress, setProgress] = useState({
+    energy: 0,
+    co2: 0,
+    water: 0,
+    waste: 0,
+    socialRisk: 0,
+  });
+  const [isVisible, setIsVisible] = useState(false); // Status visibilitas
+  const sectionRef = useRef(null); // Referensi untuk elemen
 
   useEffect(() => {
-    const timer = setTimeout(() => setProgress(66), 500);
-    return () => clearTimeout(timer);
+    const handleScroll = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true); // Jika elemen terlihat, set isVisible ke true
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleScroll, {
+      threshold: 0.1, // Menentukan seberapa banyak elemen yang harus terlihat
+    });
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
   }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      // Set progress bar saat elemen terlihat
+      const timeout = setTimeout(() => {
+        setProgress({
+          energy: 24,
+          co2: 33,
+          water: 40,
+          waste: 70,
+          socialRisk: 80,
+        });
+      }, 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [isVisible]);
+
   return (
-    <div className="relative isolate overflow-hidden bg-[#F8F7F0] py-24 sm:py-32">
-      <img
-        alt="Hero Image Green Benefits"
-        src={hero}
-        className="absolute inset-0 -z-10 h-full w-full object-cover"
-      />
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* <div
-          aria-hidden="true"
-          className="absolute -bottom-8 -left-96 -z-10 transform-gpu blur-3xl sm:-bottom-64 sm:-left-40 lg:-bottom-32 lg:left-8 xl:-left-10"
-        >
-          <div
-            style={{
-              clipPath:
-                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-            }}
-            className="aspect-[1266/975] w-[79.125rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20"
-          />
-        </div> */}
-        <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-          <p className="mt-2 text-3xl font-bold tracking-tight text-black sm:text-4xl">
-            Green Benefits
-          </p>
-        </div>
-        <div className="mt-16 w-full">
-          {/* <ResponsiveContainer width="60%" height={400}>
-            <ComposedChart
-              layout="vertical"
-              data={stats}
-              margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
-            >
-              <XAxis dataKey="name" stroke="#000000" />
-              <YAxis stroke="#000000" />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="value" fill="#82ca9d" opacity={0.9} />
-              {stats[0].endValue && (
-                <Bar dataKey="endValue" fill="#000000" opacity={0.9} />
-              )}
-            </ComposedChart>
-          </ResponsiveContainer> */}
-          {/* {stats.map((item) => (
-            <Progress key={item.id} value={item.value} className="w-[60%]" />
-          ))} */}
-          {stats.map((item) => (
-            <div
-              key={item.id}
-              className="flex flex-col items-start gap-2 justify-between"
-            >
-              <div>
-                <p className="text-lg font-medium">{item.name}</p>
-              </div>
-              <div className="flex gap-5 w-full">
-                <Progress
-                  value={(item.value / (item.endValue || 100)) * 100}
-                  max={100}
-                />
-                <p className="text-lg font-medium">
-                  {item.value}%{item.endValue ? ` - ${item.endValue}%` : ""}
-                </p>
-              </div>
-            </div>
+    <div
+      ref={sectionRef} // Tambahkan referensi ke div
+      className="why-area-1 overflow-hidden bg-smoke flex items-center justify-center"
+      style={{
+        backgroundImage: "url('/why-bg-2-1.svg')",
+        backgroundSize: "cover", // Use cover to fill the div properly
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        height: "auto", // Set height to auto
+        padding: "0", // Remove padding
+        margin: "0", // Remove margin
+      }}
+    >
+      <div className="container container2 flex justify-start w-full max-w-md mx-4 my-0"> {/* Set my-0 to remove vertical margin */}
+        <div className="title-area space-y-8">
+          <h1 className="sec-title font-semibold text-left mt-10" style={{ fontSize: '3.5rem' }}>Green Benefits</h1>
+          {Object.keys(progress).map((key) => (
+            <SkillBar key={key} title={key} value={progress[key]} isVisible={isVisible} />
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+function SkillBar({ title, value, isVisible }) {
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    let startValue = 0;
+    const increment = value / 100; // Tambahkan nilai bertahap
+
+    if (isVisible) {
+      const timer = setInterval(() => {
+        startValue += increment;
+        if (startValue >= value) {
+          clearInterval(timer);
+          startValue = value;
+        }
+        setDisplayValue(Math.floor(startValue));
+      }, 15); // Update setiap 15ms untuk animasi smooth
+
+      return () => clearInterval(timer);
+    }
+  }, [value, isVisible]);
+
+  return (
+    <div className="skill-feature">
+      <h3 className="skill-feature_title text-lg font-medium capitalize">{title}</h3>
+      <div className="relative w-full">
+        {/* Bar abu-abu muda sebagai latar belakang */}
+        <div className="progress-background bg-gray-200 h-6 rounded">
+          <div
+            className="progress-bar bg-green-500 h-6 rounded transition-all duration-1000"
+            style={{ width: `${isVisible ? value : 0}%` }} // Memastikan bar hanya mengisi saat terlihat
+          ></div>
+        </div>
+      </div>
+      <div className="progress-value text-gray-700 font-bold">
+        <span className="counter-number">{displayValue}</span>%
       </div>
     </div>
   );
