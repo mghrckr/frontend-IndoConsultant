@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   AcademicCapIcon,
   SparklesIcon,
   ShieldCheckIcon,
   CheckBadgeIcon,
-  BoltIcon,
   LightBulbIcon,
   UserGroupIcon,
 } from '@heroicons/react/20/solid';
@@ -13,129 +12,106 @@ import {
 const values = [
   {
     name: 'Smart',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
+    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
     icon: AcademicCapIcon,
   },
   {
     name: 'Professional',
-    description:
-      'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+    description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
     icon: CheckBadgeIcon,
   },
   {
     name: 'Innovative',
-    description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus voluptas blanditiis et.',
+    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus voluptas blanditiis et.',
     icon: LightBulbIcon,
   },
   {
     name: 'Respect',
-    description:
-      'Iure sed ab. Aperiam optio placeat dolor facere. Officiis pariatur eveniet atque et dolor.',
+    description: 'Iure sed ab. Aperiam optio placeat dolor facere. Officiis pariatur eveniet atque et dolor.',
     icon: UserGroupIcon,
   },
   {
     name: 'Integrity',
-    description:
-      'Laudantium tempora sint ut consectetur ratione. Ut illum ut rem numquam fuga delectus.',
+    description: 'Laudantium tempora sint ut consectetur ratione. Ut illum ut rem numquam fuga delectus.',
     icon: SparklesIcon,
   },
   {
     name: 'Trusted',
-    description:
-      'Culpa dolorem voluptatem velit autem rerum qui et corrupti. Quibusdam quo placeat.',
+    description: 'Culpa dolorem voluptatem velit autem rerum qui et corrupti. Quibusdam quo placeat.',
     icon: ShieldCheckIcon,
   },
 ];
 
 const Values = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger when 20% of the element is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const fadeInStyle = (delay = 0) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'scale(1)' : 'scale(0.95)',
+    transition: `opacity 0.8s ease ${delay}s, transform 0.8s ease ${delay}s`,
+  });
+
   return (
-    <div className="process-area-3 space overflow-hidden position-relative">
-      <div
-        className="portfolio-shape1_2 shape-mockup absolute bottom-0 right-0"
-        data-bottom="0%"
-        data-right={0}
-      >
-        <img src="/process-shape1-2.png" alt="img" />
-      </div>
-      <div
-        className="process-shape3_2 shape-mockup jump-reverse d-lg-block d-none"
-        data-top={0}
-        data-left={0}
-      >
-        <img src="/service-shape1-2.png" alt="img" />
-      </div>
+    <div className="process-area-3 space overflow-hidden position-relative" ref={sectionRef}>
       <div className="container container2">
         <div className="row justify-content-center">
           <div className="col-xl-7 col-lg-8">
             <div className="title-area text-center">
-              <h2 className="sec-title wow fadeInUp" data-wow-delay=".2s">
+              <h2 className="sec-title wow fadeInUp" data-wow-delay=".2s" style={fadeInStyle(0)}>
                 Our Value
               </h2>
-              <span className="sub-title wow fadeInUp" data-wow-delay=".3s">
-                Sebagai perusahaan yang bergerak di bidang{" "}
+              <span className="sub-title wow fadeInUp" data-wow-delay=".3s" style={fadeInStyle(0.1)}>
+                Sebagai perusahaan yang bergerak di bidang lingkungan,{" "}
+                kami berkomitmen menjadi perusahaan pemeriksaan dan fasilitator kinerja bisnis
+                berkelanjutan baik secara teknik dan manajemen, yang dapat meningkatkan reputasi,
+                efisiensi operasional, dan memenuhi regulasi, serta berkontribusi pada pembangunan yang
+                berkelanjutan melalui value kami, sebagai berikut :
               </span>
             </div>
           </div>
         </div>
         <div className="row gy-30 justify-content-center">
-          <div style={{ marginBottom: '60px' }}>
-            <div className="process-card style3 wow fadeInUp" data-wow-delay=".2s">
-              <div className="process-card-icon">
-                <div className="process-num">S</div>
+          {values.map((value, index) => (
+            <div key={value.name} style={{ marginBottom: '60px' }}>
+              <div
+                style={fadeInStyle(index * 0.1 + 0.2)} // Staggered effect based on index
+                className="process-card style3"
+              >
+                <div className="process-card-icon">
+                  <div className="process-num">{value.name.charAt(0)}</div>
+                </div>
+                <h3 className="process-card-title">{value.name}</h3>
               </div>
-              <h3 className="process-card-title">Smart</h3>
             </div>
-          </div>
-          <div />
-          <div style={{ marginBottom: '60px' }}>
-            <div className="process-card style3 wow fadeInUp" data-wow-delay=".3s">
-              <div className="process-card-icon">
-                <div className="process-num">P</div>
-              </div>
-              <h3 className="process-card-title">Professional</h3>
-            </div>
-          </div>
-          <div />
-          <div style={{ marginBottom: '60px' }}>
-            <div className="process-card style3 wow fadeInUp" data-wow-delay=".4s">
-              <div className="process-card-icon">
-                <div className="process-num">I</div>
-              </div>
-              <h3 className="process-card-title">Inovative</h3>
-            </div>
-          </div>
-          <div />
-          <div style={{ marginBottom: '60px' }}>
-            <div className="process-card style3 wow fadeInUp" data-wow-delay=".5s">
-              <div className="process-card-icon">
-                <div className="process-num">R</div>
-              </div>
-              <h3 className="process-card-title">Respect</h3>
-            </div>
-          </div>
-          <div />
-          <div style={{ marginBottom: '60px' }}>
-            <div className="process-card style3 wow fadeInUp" data-wow-delay=".6s">
-              <div className="process-card-icon">
-                <div className="process-num">I</div>
-              </div>
-              <h3 className="process-card-title">Integrity</h3>
-            </div>
-          </div>
-          <div />
-          <div>
-            <div className="process-card style3 wow fadeInUp" data-wow-delay=".7s">
-              <div className="process-card-icon">
-                <div className="process-num">T</div>
-              </div>
-              <h3 className="process-card-title">Trusted</h3>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

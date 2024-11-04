@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { fetchOutput, fetchPortfolios, fetchRuangLingkup } from '@/store/actionCreators';
@@ -31,17 +31,52 @@ const OtherPortfolio = () => {
     dispatch(fetchOutput());
   }, [dispatch]);
 
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger when 20% of the element is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const fadeInStyle = (delay = 0) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'scale(1)' : 'scale(0.95)',
+    transition: `opacity 1.7s ease ${delay}s, transform 1.7s ease ${delay}s`,
+  });
+
   return (
-    <div className="faq-area-1 space overflow-hidden bg-smoke">
+    <div
+    ref={sectionRef}
+    className="faq-area-1 space overflow-hidden bg-smoke">
       <div className="container container2">
         <div className="row align-items-center flex-row-reverse">
           <div className="col-lg-12">
             <div className="title-area mb-45">
-              <h2 className="sec-title mb-0 wow fadeInLeft" data-wow-delay=".6s">
+              <h2 className="sec-title mb-0 wow fadeInLeft" data-wow-delay=".6s" style={fadeInStyle(0.4)}>
                 Others Portfolio
               </h2>
             </div>
-            <div className="accordion-area accordion" id="faqAccordion">
+            <div className="accordion-area accordion" id="faqAccordion" style={fadeInStyle(0.8)}>
               <div className="accordion">
                 {filterPort.map((item, index) => {
                   const isOpen = openIndex === index;

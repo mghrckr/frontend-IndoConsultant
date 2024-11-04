@@ -1,21 +1,57 @@
+import React, { useEffect, useRef, useState } from "react";
 
 export default function Team() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger when 20% of the element is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const fadeInStyle = (delay = 0) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'scale(1)' : 'scale(0.95)',
+    transition: `opacity 1.7s ease ${delay}s, transform 1.7s ease ${delay}s`,
+  });
+  
   return (
-    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+    <div
+    ref={sectionRef}
+     className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="flex flex-col lg:flex-row justify-between">
         <div className="lg:w-7/12 text-center lg:text-left">
           <div className="title-area">
-            <span className="sub-title animate-fadeInLeft" style={{ animationDelay: ".3s" }}>
+            <span className="sub-title animate-fadeInLeft" style={fadeInStyle(0.4)}>
               OUR BEST TEAM
             </span>
-            <h2 className="sec-title animate-fadeInLeft" style={{ animationDelay: ".4s" }}>
+            <h2 className="sec-title animate-fadeInLeft" style={fadeInStyle(0.5)}>
               Core Director
             </h2>
           </div>
         </div>
         <div
           className="lg:w-5/12 text-center lg:text-right self-center animate-fadeInRight"
-          style={{ animationDelay: ".9s" }}
+          style={fadeInStyle(0.7)}
         >
           <a href="/team" className="btn style4 mb-12 lg:mb-0">
             Explore Our Team <i className="fas fa-angle-double-right" />
@@ -24,7 +60,7 @@ export default function Team() {
       </div>
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
+          <div className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl" style={fadeInStyle(0.8)}>
             <img
               className="object-cover w-full h-56 md:h-64 xl:h-80"
               src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
@@ -57,7 +93,7 @@ export default function Team() {
           </div>
         </div>
         <div>
-          <div className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
+          <div className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl" style={fadeInStyle(0.9)}>
             <img
               className="object-cover w-full h-56 md:h-64 xl:h-80"
               src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
@@ -90,7 +126,7 @@ export default function Team() {
           </div>
         </div>
         <div className="flex flex-col h-full">
-          <div className="relative flex-grow overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl h-full">
+          <div className="relative flex-grow overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl h-full" style={fadeInStyle(1.1)}>
             <img
               className="object-cover w-full h-full"
               src="/putut-widodo.jpg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
@@ -124,7 +160,7 @@ export default function Team() {
           </div>
         </div>
         <div className="flex flex-col h-full">
-          <div className="relative flex-grow overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl h-full">
+          <div className="relative flex-grow overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl h-full" style={fadeInStyle(1.2)}>
             <img
               className="object-cover w-full h-full"
               src="/e-kurniawan.jpg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"

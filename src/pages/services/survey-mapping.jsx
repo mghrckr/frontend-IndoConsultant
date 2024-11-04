@@ -1,4 +1,48 @@
+import React, { useEffect, useRef, useState } from "react";
+
 export default function SurveyMapping() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger when 20% of the element is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const fadeInStyle = (delay = 0) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'scale(1)' : 'scale(0.95)',
+    transition: `opacity 1.7s ease ${delay}s, transform 1.7s ease ${delay}s`,
+  });
+
+  const fadeInStyleDicection = (delay = 0, direction = 'left', immediate = false) => {
+    const translateValue = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
+    return {
+      opacity: immediate ? 1 : (isVisible ? 1 : 0),
+      transform: immediate ? 'translateX(0)' : (isVisible ? 'translateX(0)' : translateValue),
+      transition: immediate ? 'none' : `opacity 2s ease ${delay}s, transform 2s ease ${delay}s`, // No transition if immediate
+    };
+  };
+
   return (
     <>
       <div className="breadcumb-wrapper" style={{ backgroundImage: "url('/1.service.jpeg')" }}>
@@ -17,7 +61,9 @@ export default function SurveyMapping() {
           </div>
         </div>
       </div >
-      <div className="service-details-area space-top space-extra-bottom overflow-hidden">
+      <div
+        ref={sectionRef}
+        className="service-details-area space-top space-extra-bottom overflow-hidden">
         <div className="container container2">
           <div className="row gx-30 flex-row">
             <div className="col-lg-12">
@@ -25,7 +71,7 @@ export default function SurveyMapping() {
                 <div className="page-content">
                   <div className="row justify-content-center">
                     <div className="col-xl-6 col-lg-8">
-                      <div className="title-area text-center">
+                      <div className="title-area text-center" style={fadeInStyle(0.4)}>
                         <h2 className="sec-title wow fadeInUp" data-wow-delay=".1s">
                           Perencanaan
                         </h2>
@@ -43,7 +89,7 @@ export default function SurveyMapping() {
                   </div>
                   {/* Gambar di kanan, teks di kiri */}
                   <div className="flex flex-col md:flex-row items-center mb-14">
-                    <div className="md:w-1/2 mb-4 md:mb-0">
+                    <div className="md:w-1/2 mb-4 md:mb-0" style={fadeInStyleDicection(0.7, 'left')}>
                       <h3 className="page-subtitle mb-4">Survey Topografi</h3>
                       <p>Maksud dan Tujuan Survey Topografi</p>
                       <ul className="mt-4 space-y-2">
@@ -74,14 +120,14 @@ export default function SurveyMapping() {
                         ))}
                       </ul>
                     </div>
-                    <div className="md:w-1/2 md:ml-8 mt-8 md:mt-0">
+                    <div className="md:w-1/2 md:ml-8 mt-8 md:mt-0" style={fadeInStyle(0.8)}>
                       <img src="/service/services-5-1.jpg" alt="Air Pollution" className="rounded-2xl shadow-lg transform transition duration-300 hover:scale-105" />
                     </div>
                   </div>
 
                   {/* Gambar di kiri, teks di kanan */}
                   <div className="flex flex-col md:flex-row-reverse items-center mb-14">
-                    <div className="md:w-1/2 mb-4 md:mb-0">
+                    <div className="md:w-1/2 mb-4 md:mb-0" style={fadeInStyleDicection(0.9, 'right')}>
                       <h3 className="page-subtitle mb-4">Kegiatan yang Dilakukan Pada Pekerjaan Survey Topografi</h3>
                       <ul className="mt-4 space-y-2">
                         {[
@@ -111,7 +157,7 @@ export default function SurveyMapping() {
                         ))}
                       </ul>
                     </div>
-                    <div className="md:w-1/2 md:mr-8 mt-8 md:mt-0">
+                    <div className="md:w-1/2 md:mr-8 mt-8 md:mt-0" style={fadeInStyle(1)}>
                       <img src="/service/services-5-2.jpg" alt="Water Pollution" className="rounded-2xl shadow-lg transform transition duration-300 hover:scale-105" />
                     </div>
                   </div>
@@ -145,8 +191,8 @@ export default function SurveyMapping() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center space-x-4">
-            <div className="col-xl-4 col-sm-12 process-card-wrap">
+          <div className="flex flex-wrap justify-center space-x-0 md:space-x-4">
+             <div className="w-full md:w-1/3 lg:w-1/4 process-card-wrap mb-4"> 
               <div
                 className="process-card style3 wow fadeInLeft"
                 data-wow-delay=".7s"
@@ -210,7 +256,7 @@ export default function SurveyMapping() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-sm-12 process-card-wrap">
+             <div className="w-full md:w-1/3 lg:w-1/4 process-card-wrap mb-4"> 
               <div className="process-card style3 wow fadeInUp" data-wow-delay="1.6s">
                 <div className="process-card-icon">
                   <div className="process-num">02</div>
@@ -268,7 +314,7 @@ export default function SurveyMapping() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-sm-12 process-card-wrap">
+             <div className="w-full md:w-1/3 lg:w-1/4 process-card-wrap mb-4"> 
               <div
                 className="process-card style3 wow fadeInRight"
                 data-wow-delay="2.5s"
@@ -447,8 +493,8 @@ export default function SurveyMapping() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center space-x-4">
-            <div className="col-xl-4 col-sm-12 process-card-wrap">
+          <div className="flex flex-wrap justify-center space-x-0 md:space-x-4">
+            <div className="w-full md:w-1/3 lg:w-1/4 process-card-wrap">
               <div
                 className="process-card style3 wow fadeInLeft"
                 data-wow-delay=".3s"
@@ -516,7 +562,7 @@ export default function SurveyMapping() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-sm-12 process-card-wrap">
+            <div className="w-full md:w-1/3 lg:w-1/4 process-card-wrap mb-6">
               <div className="process-card style3 wow fadeInUp" data-wow-delay="1.3s">
                 <div className="process-card-icon">
                   <div className="process-num">02</div>
@@ -582,7 +628,7 @@ export default function SurveyMapping() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-sm-12 process-card-wrap">
+            <div className="w-full md:w-1/3 lg:w-1/4 process-card-wrap">
               <div
                 className="process-card style3 wow fadeInRight"
                 data-wow-delay="2.4s"

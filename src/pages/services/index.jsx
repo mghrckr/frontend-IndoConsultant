@@ -5,10 +5,10 @@ import OurServices from "./our-services";
 
 const Services = () => {
   return (
-    <div>
+    <>
       <Hero />
       <OurServices />
-    </div>
+    </>
   );
 };
 

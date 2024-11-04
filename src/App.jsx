@@ -22,6 +22,7 @@ import store from "./store";
 import { NewsTable } from "./pages/admin/newsTable";
 import { Login } from "./pages/admin/login";
 import { PortfolioTable } from "./pages/admin/portfolioTable";
+import { PrivateRoute } from "./pages/PrivateRoute";
 
 const App = () => {
   return (
@@ -30,8 +31,9 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/newsTable" element={<NewsTable />} />
-            <Route path="/portfolioTable" element={<PortfolioTable />} />
+            <Route path="/newsTable" element={<PrivateRoute element={<NewsTable />} />} />
+            <Route path="/portfolioTable" element={<PrivateRoute element={<PortfolioTable />} />} />
+
 
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />

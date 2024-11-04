@@ -19,15 +19,13 @@ const Hero = () => {
         style={{
           fontFamily: 'Montserrat, sans-serif',
           color: '#2B4E92',
-          margin: '-0.2em 0 -0.2em 0',
           lineHeight: 1.1,
-          fontSize: '60px',
+          fontSize: '4rem', // Responsive font size
           fontWeight: 800,
           zIndex: 1,
           top: '50%',
-          right: '1%',
-          width: '100%',
-          transform: 'translateY(-50%)',
+          left: '50%', // Center the text
+          transform: 'translate(-50%, -50%)', // Center the text vertically and horizontally
         }}
       >
         Contact

@@ -1,9 +1,41 @@
-/* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const Quotes = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger when 20% of the element is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const fadeInStyle = (delay = 0) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'scale(1)' : 'scale(0.95)',
+    transition: `opacity 0.8s ease ${delay}s, transform 0.8s ease ${delay}s`,
+  });
   return (
     <div
+      ref={sectionRef}
       className="counter-area-2 space overflow-hidden"
       style={{
         backgroundImage: "url('/counter-2-1-bg.jpg')",
@@ -14,9 +46,9 @@ const Quotes = () => {
     >
       <div className="container container2">
         <div className="row gy-40 justify-content-lg-between justify-content-center">
-          <div className="col-lg-12">
-            <div className="testi-box style2 wow fadeInUp" data-wow-delay=".2s">
-              <div className="media wow fadeInUp" data-wow-delay=".2s">
+          <div className="col-lg-12" style={fadeInStyle(0.4)}>
+            <div className="testi-box style2 wow fadeInUp" data-wow-delay=".2s" style={fadeInStyle(0.4)}>
+              <div className="media wow fadeInUp" data-wow-delay=".2s" style={fadeInStyle(0.7)}>
                 <div className="testi-box_profile">
                   <div className="testi-box_img">
                     <img src="/director.jpg" alt="img" />
@@ -47,7 +79,7 @@ const Quotes = () => {
                   </svg>
                 </div>
               </div>
-              <p className="testi-box_text wow fadeInLeft" data-wow-delay=".3s">
+              <p className="testi-box_text wow fadeInLeft" data-wow-delay=".3s" style={fadeInStyle(1)}>
                 Lingkungan hidup merupakan karunia dan rahmat Tuhan Yang Maha Esa
                 kepada umat manusia sebagai ruang bagi kehidupan dalam segala aspek
                 dan matranya. Manusia dengan kemampuan berpikir dan kepekaan
@@ -56,7 +88,7 @@ const Quotes = () => {
                 melakukan berbagai inovasi yang dapat mempermudah dan meningkatkan
                 kehidupannya.
               </p>
-              <p className="testi-box_text wow fadeInRight" data-wow-delay=".4s">
+              <p className="testi-box_text wow fadeInRight" data-wow-delay=".4s" style={fadeInStyle(1.2)}>
                 Lingkungan hidup bukanlah warisan dari pendahulu kita, tetapi
                 titipan generasi mendatang. Setiap kegiatan pembangunan harus selalu
                 memberi kesempatan kepada generasi mendatang untuk mampu memenuhi
@@ -65,7 +97,7 @@ const Quotes = () => {
                 kelangsungan kehidupan generasi saat ini dan generasi masa yang akan
                 datang.
               </p>
-              <p className="testi-box_text wow fadeInUp" data-wow-delay=".5s">
+              <p className="testi-box_text wow fadeInUp" data-wow-delay=".5s" style={fadeInStyle(1.4)}>
                 Indo Consultant hadir dalam rangka mewujudkan terciptanya
                 penyelarasan antara imperatif pembangunan dan kewajiban moral, dalam
                 rangka mewujudkan lingkungan yang lestari melalui bisnis perusahaan

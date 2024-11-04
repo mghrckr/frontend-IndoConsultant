@@ -1,4 +1,48 @@
+import React, { useEffect, useRef, useState } from "react";
+
 export default function GreenHouseGas() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger when 20% of the element is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const fadeInStyle = (delay = 0) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'scale(1)' : 'scale(0.95)',
+    transition: `opacity 1.7s ease ${delay}s, transform 1.7s ease ${delay}s`,
+  });
+
+  const fadeInStyleDicection = (delay = 0, direction = 'left', immediate = false) => {
+    const translateValue = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
+    return {
+      opacity: immediate ? 1 : (isVisible ? 1 : 0),
+      transform: immediate ? 'translateX(0)' : (isVisible ? 'translateX(0)' : translateValue),
+      transition: immediate ? 'none' : `opacity 2s ease ${delay}s, transform 2s ease ${delay}s`, // No transition if immediate
+    };
+  };
+
   return (
     <>
       <div className="breadcumb-wrapper" style={{ backgroundImage: "url('/1.service.jpeg')" }}>
@@ -17,7 +61,9 @@ export default function GreenHouseGas() {
           </div>
         </div>
       </div >
-      <div className="service-details-area space-top space-extra-bottom overflow-hidden">
+      <div
+        ref={sectionRef}
+        className="service-details-area space-top space-extra-bottom overflow-hidden">
         <div className="container container2">
           <div className="row gx-30 flex-row">
             <div className="col-lg-12">
@@ -27,10 +73,10 @@ export default function GreenHouseGas() {
                   {/* Gambar di kanan, teks di kiri */}
                   <div className="flex flex-col md:flex-row items-center mb-14">
                     <div className="md:w-1/2 mb-4 md:mb-0">
-                      <h2 className="page-subtitle mb-4"> Greenhouse Gas (GHG) <br />
+                      <h2 className="page-subtitle mb-4" style={fadeInStyle(0.4)}> Greenhouse Gas (GHG) <br />
                         Document on Power Plant</h2>
-                      <h5 className="mb-4">Carbon Trading Technical Assistance Consultant</h5>
-                      <ul className="mt-4 space-y-2">
+                      <h5 className="mb-4" style={fadeInStyleDicection(0.6,'left')}>Carbon Trading Technical Assistance Consultant</h5>
+                      <ul className="mt-4 space-y-2" style={fadeInStyleDicection(0.8,'left')}>
                         {[
                           "Conducting Inventory of Emission History Data",
                           "Preparation of Mitigation and Monitoring Plan",
@@ -56,8 +102,8 @@ export default function GreenHouseGas() {
                           </li>
                         ))}
                       </ul>
-                      <h5 className="mb-4 mt-4">Technical Assistance Consultant in Emission Offset</h5>
-                      <ul className="mt-4 space-y-2">
+                      <h5 className="mb-4 mt-4" style={fadeInStyleDicection(1)}>Technical Assistance Consultant in Emission Offset</h5>
+                      <ul className="mt-4 space-y-2" style={fadeInStyleDicection(1.2)}>
                         {[
                           "DRAM Technical Assistance Consultant",
                           "LCAM Technical Assistance Consultant",
@@ -83,7 +129,7 @@ export default function GreenHouseGas() {
                         ))}
                       </ul>
                     </div>
-                    <div className="md:w-1/2 md:ml-8 mt-8 md:mt-0">
+                    <div className="md:w-1/2 md:ml-8 mt-8 md:mt-0" style={fadeInStyleDicection(1.6,'right')}>
                       <img src="/service/greenhouse-gases.jpg" alt="Air Pollution" className="rounded-2xl shadow-lg transform transition duration-300 hover:scale-105" />
                     </div>
                   </div>

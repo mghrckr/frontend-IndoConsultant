@@ -1,6 +1,43 @@
+import React, { useEffect, useRef, useState } from 'react';
+
 const OurServices = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger when 20% of the element is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const fadeInStyle = (delay = 0) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'scale(1)' : 'scale(0.95)',
+    transition: `opacity 1.7s ease ${delay}s, transform 1.7s ease ${delay}s`,
+  });
+
   return (
-    <div className="service-area-2 space overflow-hidden">
+    <div
+      ref={sectionRef}
+      className="service-area-2 space overflow-hidden">
       <div
         className="leaf-shape-animation3 d-lg-block d-none"
         data-bg-src="assets/img/service/service-shape2-1.svg"
@@ -19,7 +56,7 @@ const OurServices = () => {
       <div className="container container2">
         <div className="row justify-content-center">
           <div className="col-xl-6 col-lg-8">
-            <div className="title-area text-center">
+            <div className="title-area text-center" style={fadeInStyle(0.4)}>
               <span className="sub-title">OUR SERVICES</span>
               <h2 className="sec-title">
                 Preserving The Earth
@@ -38,6 +75,7 @@ const OurServices = () => {
             <div
               className="service-card style2 wow fadeInLeft"
               data-wow-delay=".1s"
+              style={fadeInStyle(1)}
             >
               <div className="service-card_icon flex justify-center items-center">
                 <svg
@@ -90,6 +128,7 @@ const OurServices = () => {
             <div
               className="service-card style2 wow fadeInDown"
               data-wow-delay=".6s"
+              style={fadeInStyle(1.2)}
             >
               <div className="service-card_icon flex justify-center items-center">
                 <svg
@@ -135,6 +174,7 @@ const OurServices = () => {
             <div
               className="service-card style2 wow fadeInRight"
               data-wow-delay="1s"
+              style={fadeInStyle(1.4)}
             >
               <div className="service-card_icon flex justify-center items-center">
                 <svg
@@ -154,6 +194,7 @@ const OurServices = () => {
                 <h3
                   className="service-card_title wow fadeInRight"
                   data-wow-delay="1.1s"
+                  style={fadeInStyle(1.6)}
                 >
                   <a href="pengelolaan-lingkungan-ketenagalistrikan.html">
                     Service 03
@@ -179,6 +220,7 @@ const OurServices = () => {
             <div
               className="service-card style2 wow fadeInLeft"
               data-wow-delay="1.4s"
+              style={fadeInStyle(1.8)}
             >
               <div className="service-card_icon flex justify-center items-center">
                 <svg
@@ -225,6 +267,7 @@ const OurServices = () => {
             <div
               className="service-card style2 wow fadeInRight"
               data-wow-delay="1.8s"
+              style={fadeInStyle(2.2)}
             >
               <div className="service-card_icon flex justify-center items-center">
                 <svg

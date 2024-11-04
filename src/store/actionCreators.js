@@ -1,5 +1,5 @@
 
-const BASE_URL = `http://localhost:3000`
+export const BASE_URL = `http://localhost:3000`
 
 
 export const loginUser = (DB_USER, DB_PASS) => {
@@ -168,9 +168,237 @@ export const createNews = (newsItem) => {
     };
 };
 
+export const createPortfolio = (portfolioData, file) => async (dispatch) => {
+    console.log(portfolioData, 'isi nya porto');
+
+    try {
+        const formData = new FormData();
+        formData.append('judul', portfolioData.judul);
+        formData.append('isi', portfolioData.isi);
+        formData.append('lingkupPekerjaan', portfolioData.lingkupPekerjaan);
+        formData.append('divisi', portfolioData.divisi);
+
+        if (file) {
+            formData.append('gambar', file);
+        }
+
+        const response = await fetch(`${BASE_URL}/portfolios`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                "access_token": localStorage.getItem('access_token')
+            },
+        });
+
+        const newPortfolio = await response.json();
+
+        if (response.ok) {
+            dispatch({ type: 'portfolios/create', payload: newPortfolio });
+
+            // Panggil action creator untuk menyimpan ruangLingkupIsi dan outputIsi
+            if (portfolioData.ruangLingkupIsi.length > 0) {
+                dispatch(createRuangLingkup(newPortfolio.id, portfolioData.ruangLingkupIsi));
+            }
+            if (portfolioData.outputIsi.length > 0) {
+                dispatch(createOutput(newPortfolio.id, portfolioData.outputIsi));
+            }
+        } else {
+            dispatch({ type: 'CREATE_PORTFOLIO_ERROR', payload: newPortfolio.error });
+        }
+    } catch (error) {
+        dispatch({ type: 'CREATE_PORTFOLIO_ERROR', payload: error.message });
+    }
+};
+
+
+export const createRuangLingkup = (PortfolioId, ruangLingkupIsi) => async (dispatch) => {
+    try {
+        const response = await fetch(`${BASE_URL}/ruanglingkups`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "access_token": localStorage.getItem('access_token')
+            },
+            // Ganti ruangLingkupIsi menjadi isi
+            body: JSON.stringify({ PortfolioId, isi: ruangLingkupIsi })
+        });
+
+        const newRuangLingkup = await response.json();
+
+        if (response.ok) {
+            dispatch({ type: 'ruangLingkup/create', payload: newRuangLingkup });
+        } else {
+            dispatch({ type: 'CREATE_RUANGLINGKUP_ERROR', payload: newRuangLingkup.error });
+        }
+    } catch (error) {
+        dispatch({ type: 'CREATE_RUANGLINGKUP_ERROR', payload: error.message });
+    }
+};
+
+
+
+// export const createOutput = (outputIsi) => async (dispatch) => {
+//     try {
+//         const response = await fetch(`${BASE_URL}/outputs`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 "access_token": localStorage.getItem('access_token')
+//             },
+//             body: JSON.stringify({ outputIsi })
+//         });
+
+//         const newOutput = await response.json();
+
+//         if (response.ok) {
+//             dispatch({ type: 'output/create', payload: newOutput });
+//         } else {
+//             dispatch({ type: 'CREATE_OUTPUT_ERROR', payload: newOutput.error });
+//         }
+//     } catch (error) {
+//         dispatch({ type: 'CREATE_OUTPUT_ERROR', payload: error.message });
+//     }
+// };
+
+
+// export const createPortfolio = (portfolioData, file) => async (dispatch) => {
+//     console.log(portfolioData, 'isi nya porto');
+
+//     try {
+//         const formData = new FormData();
+//         formData.append('judul', portfolioData.judul);
+//         formData.append('isi', portfolioData.isi);
+//         formData.append('lingkupPekerjaan', portfolioData.lingkupPekerjaan);
+//         formData.append('divisi', portfolioData.divisi);
+
+//         if (file) {
+//             formData.append('gambar', file);
+//         }
+
+//         const response = await fetch(`${BASE_URL}/portfolios`, {
+//             method: 'POST',
+//             body: formData,
+//             headers: {
+//                 "access_token": localStorage.getItem('access_token')
+//             },
+//         });
+
+//         const newPortfolio = await response.json();
+
+//         if (response.ok) {
+//             dispatch({ type: 'portfolios/create', payload: newPortfolio });
+
+//             // Panggil action creator untuk menyimpan ruangLingkupIsi dan outputIsi
+//             if (portfolioData.ruangLingkupIsi.length > 0) {
+//                 dispatch(createRuangLingkup(portfolioData.ruangLingkupIsi));
+//             }
+//             if (portfolioData.outputIsi.length > 0) {
+//                 // Mengirimkan PortfolioId yang baru dibuat bersama outputIsi ke createOutput
+//                 dispatch(createOutput(newPortfolio.id, portfolioData.outputIsi));
+//             }
+//         } else {
+//             dispatch({ type: 'CREATE_PORTFOLIO_ERROR', payload: newPortfolio.error });
+//         }
+//     } catch (error) {
+//         dispatch({ type: 'CREATE_PORTFOLIO_ERROR', payload: error.message });
+//     }
+// };
+
+export const createOutput = (PortfolioId, outputIsi) => async (dispatch) => { 
+    try {
+        const response = await fetch(`${BASE_URL}/outputs`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "access_token": localStorage.getItem('access_token')
+            },
+            body: JSON.stringify({ PortfolioId, outputIsi })
+        });
+
+        const newOutputs = await response.json();
+
+        if (response.ok) {
+            dispatch({ type: 'output/create', payload: newOutputs });
+        } else {
+            dispatch({ type: 'CREATE_OUTPUT_ERROR', payload: newOutputs.error });
+        }
+    } catch (error) {
+        dispatch({ type: 'CREATE_OUTPUT_ERROR', payload: error.message });
+    }
+};
+
+
+export const createCarousel = (PortfolioId, file) => async (dispatch) => {
+    try {
+        const formData = new FormData();
+        formData.append('PortfolioId', PortfolioId);
+
+        if (file) {
+            formData.append('gambar', file);
+        }
+
+        const response = await fetch(`${BASE_URL}/carousels`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                "access_token": localStorage.getItem('access_token')
+            },
+        });
+
+        const newCarousel = await response.json();
+
+        if (response.ok) {
+            dispatch({ type: 'carousels/create', payload: newCarousel });
+        } else {
+            dispatch({ type: 'CREATE_CAROUSEL_ERROR', payload: newCarousel.error });
+        }
+    } catch (error) {
+        dispatch({ type: 'CREATE_CAROUSEL_ERROR', payload: error.message });
+    }
+};
+
+
+export const createPortfolioWithDetails = (portfolioData, file) => async (dispatch) => {
+    try {
+        const formData = new FormData();
+        formData.append('judul', portfolioData.judul);
+        formData.append('isi', portfolioData.isi);
+        formData.append('lingkupPekerjaan', portfolioData.lingkupPekerjaan);
+        formData.append('divisi', portfolioData.divisi);
+        if (file) {
+            formData.append('gambar', file);
+        }
+
+        // Append ruangLingkupIsi dan outputIsi sebagai JSON string
+        formData.append('ruangLingkupIsi', JSON.stringify(portfolioData.ruangLingkupIsi));
+        formData.append('outputIsi', JSON.stringify(portfolioData.outputIsi));
+
+        const response = await fetch(`${BASE_URL}/portfoliosWithDetails`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                "access_token": localStorage.getItem('access_token')
+            },
+        });
+
+        const responseData = await response.json();
+
+        if (response.ok) {
+            dispatch({ type: 'portfolios/create', payload: responseData.portfolio });
+            dispatch({ type: 'output/set', payload: responseData.output });
+            dispatch({ type: 'ruanglingkup/set', payload: responseData.ruanglingkup });
+        } else {
+            dispatch({ type: 'CREATE_PORTFOLIO_ERROR', payload: responseData.error });
+        }
+    } catch (error) {
+        dispatch({ type: 'CREATE_PORTFOLIO_ERROR', payload: error.message });
+    }
+};
+
+
 export const updateNews = (newsItem, newsId) => {
     console.log(newsItem, 'di action');
-    
+
     return async (dispatch) => {
         dispatch({ type: 'UPDATE_NEWS_LOADING' }); // Dispatch loading action
         try {
@@ -231,6 +459,28 @@ export const deleteNews = (id) => {
         }
     };
 };
+
+export const deletePortfolio = (id) => {
+    return async (dispatch) => {
+        try {
+            const response = await fetch(`${BASE_URL}/portfolios/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "access_token": localStorage.getItem('access_token')
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete portfolio');
+            }
+
+            dispatch({ type: 'portfolios/delete', payload: id });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+};
+
 
 
 export const fetchUsers = () => {

@@ -1,16 +1,56 @@
-import {
-  BuildingOffice2Icon,
-  EnvelopeIcon,
-  PhoneIcon,
-} from "@heroicons/react/24/outline";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function Content() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger when 20% of the element is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const fadeInStyle = (delay = 0) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'scale(1)' : 'scale(0.95)',
+    transition: `opacity 1.7s ease ${delay}s, transform 1.7s ease ${delay}s`,
+  });
+
+  const fadeInStyleDicection = (delay = 0, direction = 'left', immediate = false) => {
+    const translateValue = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
+    return {
+      opacity: immediate ? 1 : (isVisible ? 1 : 0),
+      transform: immediate ? 'translateX(0)' : (isVisible ? 'translateX(0)' : translateValue),
+      transition: immediate ? 'none' : `opacity 2s ease ${delay}s, transform 2s ease ${delay}s`, // No transition if immediate
+    };
+  };
+
   return (
     <>
-      <div className="contact-area space">
+      <div
+        ref={sectionRef}
+        className="contact-area space">
         <div className="container container2">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="wow fadeInLeft" data-wow-delay=".1s">
+            <div className="wow fadeInLeft" data-wow-delay=".1s" style={fadeInStyle(0.4)}>
               <div className="contact-info">
                 <div className="contact-info_icon">
                   <svg
@@ -38,7 +78,7 @@ export default function Content() {
               </div>
             </div>
 
-            <div className="wow fadeInUp" data-wow-delay=".2s">
+            <div className="wow fadeInUp" data-wow-delay=".2s" style={fadeInStyle(0.6)}>
               <div className="contact-info">
                 <div className="contact-info_icon">
                   <svg
@@ -120,7 +160,7 @@ export default function Content() {
               </div>
             </div>
 
-            <div className="wow fadeInRight" data-wow-delay=".3s">
+            <div className="wow fadeInRight" data-wow-delay=".3s" style={fadeInStyle(0.8)}>
               <div className="contact-info">
                 <div className="contact-info_icon">
                   <svg
@@ -176,7 +216,7 @@ export default function Content() {
         <div className="container container2">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Bagian Peta */}
-            <div className="wow fadeInLeft" data-wow-delay=".4s">
+            <div className="wow fadeInLeft" data-wow-delay=".4s" style={fadeInStyleDicection(1,'left')}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d495.82499104001164!2d106.82031111466736!3d-6.184263368077091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sJalan%20Taman%20Kebon%20Sirih%20III%2C%20RT.10%2FRW.10%2C%20Kampung%20Bali%2C%20Kota%20Jakarta%20Pusat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1714888227072!5m2!1sid!2sid"
                 width="100%"
@@ -189,57 +229,56 @@ export default function Content() {
             </div>
 
             {/* Bagian Form */}
-            <div className="wow fadeInRight mt-10 lg:mt-0" data-wow-delay=".4s">
-              <div className="title-area text-center lg:text-left">
-                <span className="sub-title">TALK TO US</span>
-                <h2 className="sec-title">Do you have any question?</h2>
-              </div>
-              <form action="mail.php" method="POST" className="contact-form">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control style-border w-full"
-                      name="name"
-                      id="name"
-                      placeholder="Your Name"
-                      pattern="\s*(\S\s*){3,}"
-                      required=""
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="email"
-                      className="form-control style-border w-full"
-                      name="email"
-                      id="email"
-                      placeholder="Email Address"
-                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                      required=""
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <div className="form-group">
-                      <textarea
-                        className="form-control style-border w-full"
-                        name="pertanyaan"
-                        id="message"
-                        cols={30}
-                        rows={10}
-                        placeholder="Your Message"
-                        pattern="\s*(\S\s*){3,}"
-                        required=""
-                      />
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="form-btn text-center"> */}
-                <button type="submit" className="btn w-full style4 flex justify-center items-center">
-                  Submit Now
-                </button>
-                {/* </div> */}
-              </form>
-            </div>
+            <div className="wow fadeInRight mt-10 lg:mt-0" data-wow-delay=".4s" style={fadeInStyleDicection(1.4, 'right')}>
+  <div className="title-area text-center lg:text-left">
+    <span className="sub-title">TALK TO US</span>
+    <h2 className="sec-title text-2xl md:text-3xl lg:text-4xl font-bold">Do you have any questions?</h2>
+  </div>
+  <form action="mail.php" method="POST" className="contact-form">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="form-group">
+        <input
+          type="text"
+          className="form-control style-border w-full"
+          name="name"
+          id="name"
+          placeholder="Your Name"
+          pattern="\s*(\S\s*){3,}"
+          required=""
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="email"
+          className="form-control style-border w-full"
+          name="email"
+          id="email"
+          placeholder="Email Address"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          required=""
+        />
+      </div>
+      <div className="col-span-1 md:col-span-2">
+        <div className="form-group">
+          <textarea
+            className="form-control style-border w-full"
+            name="pertanyaan"
+            id="message"
+            cols={30}
+            rows={5}
+            placeholder="Your Message"
+            pattern="\s*(\S\s*){3,}"
+            required=""
+          />
+        </div>
+      </div>
+    </div>
+    <button type="submit" className="btn w-full style4 flex justify-center items-center mt-4">
+      Submit Now
+    </button>
+  </form>
+</div>
+
           </div>
         </div>
       </div>

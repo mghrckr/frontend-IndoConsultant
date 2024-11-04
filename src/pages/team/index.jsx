@@ -9,7 +9,7 @@ const OurTeam = () => {
     <div>
       <Hero />
       <Team />
-      <StrukturPengurus />
+      {/* <StrukturPengurus /> */}
     </div>
   );
 };

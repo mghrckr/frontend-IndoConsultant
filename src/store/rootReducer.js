@@ -33,6 +33,16 @@ const portfoliosReducer = (state = portfoliosState, actions) => {
                 portfolios: actions.payload,
                 loading: false
             }
+        case 'portfolios/create':
+            return {
+                ...state,
+                portfolios: [...state.portfolios, actions.payload],
+            };
+        case 'portfolios/delete':
+            return {
+                ...state,
+                portfolios: state.portfolios.filter(item => item.id !== actions.payload),
+            };
         default:
             return state;
     }
@@ -45,11 +55,16 @@ const ruangLingkupReducer = (state = ruangLingkupState, actions) => {
                 ...state,
                 ruangLingkup: actions.payload,
                 loading: false
-            }
+            };
+        case 'ruangLingkup/create':
+            return {
+                ...state,
+                ruangLingkup: [...state.ruangLingkup, ...actions.payload],
+            };
         default:
             return state;
     }
-}
+};
 
 const outputReducer = (state = outputState, actions) => {
     switch (actions.type) {
@@ -58,11 +73,17 @@ const outputReducer = (state = outputState, actions) => {
                 ...state,
                 output: actions.payload,
                 loading: false
-            }
+            };
+        case 'output/create':
+            return {
+                ...state,
+                output: [...state.output, ...actions.payload],
+            };
         default:
             return state;
     }
-}
+};
+
 
 const carouselsReducer = (state = carouselsState, actions) => {
     switch (actions.type) {
@@ -72,6 +93,12 @@ const carouselsReducer = (state = carouselsState, actions) => {
                 carousels: actions.payload,
                 loading: false
             }
+        case 'carousels/create':
+            return {
+                ...state,
+                carousels: [...state.carousels, actions.payload],
+            };
+
         default:
             return state;
     }

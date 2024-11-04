@@ -1,11 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Content = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // Stop observing once it's visible
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger when 20% of the element is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const fadeInStyle = (delay = 0) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'scale(1)' : 'scale(0.95)',
+    transition: `opacity 0.8s ease ${delay}s, transform 0.8s ease ${delay}s`,
+  });
+
   const leafStyle = {
     backgroundImage: "url('/leaf.svg')",
     position: 'absolute',
-    top: '0', // posisi awal dari atas
-    left: '50%', // bisa diatur sesuai posisi relatif terhadap gambar
+    top: '0', // Initial position from top
+    left: '50%', // Can be adjusted based on the relative position
     transform: 'translateX(-50%)',
     animation: 'fall-animation 5s infinite',
   };
@@ -24,7 +57,8 @@ const Content = () => {
   `;
 
   return (
-    <div className="service-area-2 space overflow-hidden">
+    <div className="service-area-2 space overflow-hidden" ref={sectionRef} style={fadeInStyle()}>
+      <style>{fallAnimation}</style>
       <div
         className="leaf-shape-animation3 d-lg-block d-none"
         style={{ backgroundImage: "url('/service-shape2-1.svg')" }}
@@ -51,9 +85,7 @@ const Content = () => {
             <div className="about-content-wrap">
               <div className="row gy-4 wow fadeInUp" data-wow-delay=".2s">
                 <blockquote>
-                  Lingkungan bukanlah warisan dari pendahulu kita, tetapi titipan
-                  untuk generasi mendatang, oleh karena itu kita harus
-                  menggunakannya dengan penuh tanggung jawab
+                  Lingkungan bukanlah warisan dari pendahulu kita, tetapi titipan untuk generasi mendatang, oleh karena itu kita harus menggunakannya dengan penuh tanggung jawab.
                 </blockquote>
               </div>
               <p className="wow fadeInUp" data-wow-delay=".3s">
@@ -78,11 +110,9 @@ const Content = () => {
                 kategori yaitu :
               </p>
               <div className="row flex flex-row justify-between space-x-4">
+                {/* Example of about boxes */}
                 <div className="col-sm-6">
-                  <div
-                    className="about-box-wrap wow fadeInLeft"
-                    data-wow-delay=".4s"
-                  >
+                  <div className="about-box-wrap wow fadeInLeft" data-wow-delay=".4s">
                     <div className="about-box-icon" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -97,18 +127,17 @@ const Content = () => {
                         />
                       </svg>
                     </div>
-                    <h3 className="about-box-title">Konsultasi</h3>
-                    <p className="about-box-text">
-                      Konsultasi yaitu jasa konsultasi studi lingkungan yang
-                      menghasilkan rekomendasi-rekomendasi ramah lingkungan.
-                    </p>
+                    <div className="about-box-content">
+                      <h3 className="about-box-title">Konsultasi</h3>
+                      <p className="about-box-text">
+                        Konsultasi yaitu jasa konsultasi studi lingkungan yang
+                        menghasilkan rekomendasi-rekomendasi ramah lingkungan.
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="col-sm-6">
-                  <div
-                    className="about-box-wrap wow fadeInRight"
-                    data-wow-delay=".4s"
-                  >
+                  <div className="about-box-wrap wow fadeInLeft" data-wow-delay=".4s">
                     <div className="about-box-icon" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -135,11 +164,13 @@ const Content = () => {
                         </defs>
                       </svg>
                     </div>
-                    <h3 className="about-box-title">Jasa</h3>
-                    <p className="about-box-text">
-                      Jasa yaitu jasa implementasi sebagai bentuk aksi nyata dari
-                      rekomendasi yang telah disarankan.
-                    </p>
+                    <div className="about-box-content">
+                      <h3 className="about-box-title">Jasa</h3>
+                      <p className="about-box-text">
+                        Jasa yaitu jasa implementasi sebagai bentuk aksi nyata dari
+                        rekomendasi yang telah disarankan.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -65,9 +65,9 @@ export default function GreenBenefits() {
         margin: "0", // Remove margin
       }}
     >
-      <div className="container container2 flex justify-start w-full max-w-md mx-4 my-0"> {/* Set my-0 to remove vertical margin */}
+      <div className="container container2 flex flex-col justify-start w-full max-w-xl mx-4"> {/* Adjusted max-w-md to max-w-xl for larger screens */}
         <div className="title-area space-y-8">
-          <h1 className="sec-title font-semibold text-left mt-10" style={{ fontSize: '3.5rem' }}>Green Benefits</h1>
+          <h1 className="sec-title font-semibold text-left mt-10 text-3xl sm:text-4xl md:text-5xl">Green Benefits</h1> {/* Responsive font size */}
           {Object.keys(progress).map((key) => (
             <SkillBar key={key} title={key} value={progress[key]} isVisible={isVisible} />
           ))}
@@ -82,7 +82,7 @@ function SkillBar({ title, value, isVisible }) {
 
   useEffect(() => {
     let startValue = 0;
-    const increment = value / 100; // Tambahkan nilai bertahap
+    const increment = value / 100; // Add incremental value
 
     if (isVisible) {
       const timer = setInterval(() => {
@@ -92,21 +92,21 @@ function SkillBar({ title, value, isVisible }) {
           startValue = value;
         }
         setDisplayValue(Math.floor(startValue));
-      }, 15); // Update setiap 15ms untuk animasi smooth
+      }, 15); // Update every 15ms for smooth animation
 
       return () => clearInterval(timer);
     }
   }, [value, isVisible]);
 
   return (
-    <div className="skill-feature">
+    <div className="skill-feature space-y-2"> {/* Add space for vertical separation */}
       <h3 className="skill-feature_title text-lg font-medium capitalize">{title}</h3>
       <div className="relative w-full">
-        {/* Bar abu-abu muda sebagai latar belakang */}
+        {/* Light gray background bar */}
         <div className="progress-background bg-gray-200 h-6 rounded">
           <div
             className="progress-bar bg-green-500 h-6 rounded transition-all duration-1000"
-            style={{ width: `${isVisible ? value : 0}%` }} // Memastikan bar hanya mengisi saat terlihat
+            style={{ width: `${isVisible ? value : 0}%` }} // Ensure bar fills only when visible
           ></div>
         </div>
       </div>

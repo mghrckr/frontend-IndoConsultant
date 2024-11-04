@@ -1,8 +1,7 @@
-import { createNews, deleteNews, fetchNews, updateNews } from '@/store/actionCreators';
+import { BASE_URL, createNews, deleteNews, fetchNews, updateNews } from '@/store/actionCreators';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-const BASE_URL = `http://localhost:3000`
 import Swal from 'sweetalert2';
 
 export const NewsTable = () => {
@@ -174,7 +173,7 @@ export const NewsTable = () => {
                         <div className="flex space-x-4 border border-gray-400 rounded-full bg-gray-100/90 backdrop-blur-md shadow-md p-1 md:w-[20rem] w-10/12">
                         <button
                                 className={`h-10 w-24 md:w-auto px-4 py-2 rounded-full font-semibold transition-colors duration-200 text-xs md:text-base ${activeButton === "Home" ? "bg-gray-300 text-gray-800" : "text-gray-600 hover:bg-gray-300"}`}
-                                onClick={() => handleNavigation("Home", "/home")}
+                                onClick={() => handleNavigation("Home", "/")}
                             >
                                 Home
                             </button>
