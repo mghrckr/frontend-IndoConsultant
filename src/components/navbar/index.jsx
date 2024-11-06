@@ -130,7 +130,7 @@ const Header = () => {
             </div>
             <div className="flex justify-between items-center h-16">
               {/* Navigation Links for Desktop */}
-              <div className="hidden xl:flex lg:gap-x-12 ml-2">
+              <div className="hidden xl:flex lg:gap-x-12 ml-8">
                 <NavigationMenu>
                   <NavigationMenuList>
                     {menus.map((menu) => (

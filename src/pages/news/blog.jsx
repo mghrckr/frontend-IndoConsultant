@@ -20,6 +20,7 @@ export const Blog = () => {
 
     const handleLearnMore = (id) => {
         navigate(`/content/${id}`);
+        window.location.reload();
     };
 
     useEffect(() => {
