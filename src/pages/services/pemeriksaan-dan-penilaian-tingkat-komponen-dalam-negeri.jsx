@@ -42,7 +42,10 @@ export default function PemeriksaanDanPenilaianTingkatKomponenDalamNegeri() {
               <div className="breadcumb-content">
                 <h1
                   className="breadcumb-title"
-                  style={{ color: '#2B4E92' }}
+                  style={{
+                    color: '#2B4E92',
+                    fontFamily: 'Montserrat, Arial, sans-serif',
+                  }}
                 >
                   Pemeriksaan dan Penilaian Tingkat Komponen Dalam Negeri
                 </h1>

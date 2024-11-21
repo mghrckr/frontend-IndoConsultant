@@ -43,7 +43,9 @@ const SistemManajemenKeselamatanKetengalistrikan = () => {
               <div className="breadcumb-content">
                 <h1
                   className="breadcumb-title font-bold"
-                  style={{ color: '#2B4E92' }}
+                  style={{ color: '#2B4E92',
+                    fontFamily: 'Montserrat, Arial, sans-serif',
+                   }}
                 >
                   Pemeriksaan dan Penilaian Penerapan Sistem Manajemen Keselamatan Ketenagalistrikan
                 </h1>

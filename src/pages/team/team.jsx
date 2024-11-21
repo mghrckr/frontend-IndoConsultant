@@ -73,17 +73,25 @@ export default function Team() {
         </h2>
       </div>
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl" style={fadeInStyle(0.7)}>
-            <img
-              className="object-cover w-full h-56 md:h-64 xl:h-80"
-              src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
-              alt="Person"
-            />
+      <div className="flex justify-center items-center h-full">
+          <div
+            className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl"
+            style={{
+              ...fadeInStyle(0.8),
+              width: "300px",
+              height: "350px",
+            }}
+          >
+            <div className="absolute inset-0">
+              <img
+                className="object-cover w-full h-full"
+                src="/daud.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+                alt="Person"
+                style={{ height: '100%' }}
+              />
+            </div>
             <div className="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-              <p className="mb-1 text-lg font-bold text-gray-100">
-                Daud
-              </p>
+              <p className="mb-1 text-lg font-bold text-gray-100">Daud</p>
               <p className="mb-4 text-xs text-gray-100">Direktur Keuangan</p>
               <div className="flex items-center justify-center space-x-3">
                 <a
@@ -106,17 +114,25 @@ export default function Team() {
             </div>
           </div>
         </div>
-        <div>
-          <div className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl" style={fadeInStyle(0.9)}>
-            <img
-              className="object-cover w-full h-56 md:h-64 xl:h-80"
-              src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-              alt="Person"
-            />
+        <div className="flex justify-center items-center h-full">
+          <div
+            className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl"
+            style={{
+              ...fadeInStyle(0.8),
+              width: "300px",
+              height: "350px",
+            }}
+          >
+            <div className="absolute inset-0">
+              <img
+                className="object-cover w-full h-full"
+                src="/sanny.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+                alt="Person"
+                style={{ height: '100%' }}
+              />
+            </div>
             <div className="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-              <p className="mb-1 text-lg font-bold text-gray-100">
-                Sanny Wicaksono
-              </p>
+              <p className="mb-1 text-lg font-bold text-gray-100">Sanny Wicaksono</p>
               <p className="mb-4 text-xs text-gray-100">Direktur Utama</p>
               <div className="flex items-center justify-center space-x-3">
                 <a
@@ -139,18 +155,25 @@ export default function Team() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col h-full">
-          <div className="relative flex-grow overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl h-full" style={fadeInStyle(1.1)}>
-            <img
-              className="object-cover w-full h-full"
-              src="/putut-widodo.jpg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-              alt="Person"
-              style={{ height: '100%' }}
-            />
+        <div className="flex justify-center items-center h-full">
+          <div
+            className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl"
+            style={{
+              ...fadeInStyle(0.8),
+              width: "300px",
+              height: "350px",
+            }}
+          >
+            <div className="absolute inset-0">
+              <img
+                className="object-cover w-full h-full"
+                src="/putut.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+                alt="Person"
+                style={{ height: '100%' }}
+              />
+            </div>
             <div className="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-              <p className="mb-1 text-lg font-bold text-gray-100">
-                Putut Widodo
-              </p>
+              <p className="mb-1 text-lg font-bold text-gray-100">Putut Widodo</p>
               <p className="mb-4 text-xs text-gray-100">Direktur Operasional</p>
               <div className="flex items-center justify-center space-x-3">
                 <a
@@ -173,18 +196,25 @@ export default function Team() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col h-full">
-          <div className="relative flex-grow overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl h-full" style={fadeInStyle(1.3)}>
-            <img
-              className="object-cover w-full h-full"
-              src="/e-kurniawan.jpg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-              alt="Person"
-              style={{ height: '100%' }}
-            />
+        <div className="flex justify-center items-center h-full">
+          <div
+            className="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl"
+            style={{
+              ...fadeInStyle(0.8),
+              width: "300px",
+              height: "350px",
+            }}
+          >
+            <div className="absolute inset-0">
+              <img
+                className="object-cover w-full h-full"
+                src="/kurniawan.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+                alt="Person"
+                style={{ height: '100%' }}
+              />
+            </div>
             <div className="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-              <p className="mb-1 text-lg font-bold text-gray-100">
-                E Kurniawan
-              </p>
+              <p className="mb-1 text-lg font-bold text-gray-100">E Kurniawan</p>
               <p className="mb-4 text-xs text-gray-100">Direktur Pengembangan Bisnis & Riset</p>
               <div className="flex items-center justify-center space-x-3">
                 <a
@@ -207,6 +237,7 @@ export default function Team() {
             </div>
           </div>
         </div>
+     
       </div>
     </div>
   );

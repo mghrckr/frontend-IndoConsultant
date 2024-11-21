@@ -58,6 +58,13 @@ const OurServices = () => {
           <div className="col-xl-6 col-lg-8">
             <div className="title-area text-center" style={fadeInStyle(0.4)}>
               <span className="sub-title">OUR SERVICES</span>
+              <p className="wow fadeInUp" data-wow-delay=".3s">
+                Sektor Bisnis:
+                <br />1. Ketenagalistrikan: Pembangkit & Transmisi
+                <br />2. Minyak & Gas Bumi
+                <br />3. Mineral & Batubara
+                <br />4. Energi Baru Terbarukan & Konservasi Energi
+              </p>
               <h2 className="sec-title">
                 Preserving The Earth
               </h2>

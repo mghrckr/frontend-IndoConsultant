@@ -52,7 +52,9 @@ export default function SurveyMapping() {
               <div className="breadcumb-content">
                 <h1
                   className="breadcumb-title"
-                  style={{ color: '#2B4E92' }}
+                  style={{ color: '#2B4E92',
+                    fontFamily: 'Montserrat, Arial, sans-serif',
+                   }}
                 >
                   Pemeriksaan dan Penilaian Kompensasi Tanah, Bangunan dan/atau Tanaman yang Berada di Bawah Ruang Bebas Jaringan Transmisi Tenaga Listrik
                 </h1>

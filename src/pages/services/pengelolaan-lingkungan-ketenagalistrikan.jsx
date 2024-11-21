@@ -46,7 +46,9 @@ export default function PengelolaanLingkunganKetenagalistrikan() {
               <div className="breadcumb-content">
                 <h1
                   className="breadcumb-title font-bold font-sans"
-                  style={{ color: '#6C9C43' }}
+                  style={{ color: '#6C9C43',
+                    fontFamily: 'Montserrat, Arial, sans-serif',
+                   }}
                 >
                   Pengelolaan Lingkungan Ketenagalistrikan
                 </h1>

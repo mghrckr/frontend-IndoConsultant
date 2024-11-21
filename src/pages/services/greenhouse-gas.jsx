@@ -51,8 +51,11 @@ export default function GreenHouseGas() {
             <div className="col-lg-12">
               <div className="breadcumb-content">
                 <h1
-                  className="breadcumb-title font-bold font-sans"
-                  style={{ color: '#6C9C43' }}
+                  className="breadcumb-title font-bold"
+                  style={{
+                    color: '#6C9C43',
+                    fontFamily: 'Montserrat, Arial, sans-serif',
+                  }}
                 >
                   Greenhouse Gas (GHG)
                 </h1>
@@ -75,8 +78,8 @@ export default function GreenHouseGas() {
                     <div className="md:w-1/2 mb-4 md:mb-0">
                       <h2 className="page-subtitle mb-4" style={fadeInStyle(0.4)}> Greenhouse Gas (GHG) <br />
                         Document on Power Plant</h2>
-                      <h5 className="mb-4" style={fadeInStyleDicection(0.6,'left')}>Carbon Trading Technical Assistance Consultant</h5>
-                      <ul className="mt-4 space-y-2" style={fadeInStyleDicection(0.8,'left')}>
+                      <h5 className="mb-4" style={fadeInStyleDicection(0.6, 'left')}>Carbon Trading Technical Assistance Consultant</h5>
+                      <ul className="mt-4 space-y-2" style={fadeInStyleDicection(0.8, 'left')}>
                         {[
                           "Conducting Inventory of Emission History Data",
                           "Preparation of Mitigation and Monitoring Plan",
@@ -129,7 +132,7 @@ export default function GreenHouseGas() {
                         ))}
                       </ul>
                     </div>
-                    <div className="md:w-1/2 md:ml-8 mt-8 md:mt-0" style={fadeInStyleDicection(1.6,'right')}>
+                    <div className="md:w-1/2 md:ml-8 mt-8 md:mt-0" style={fadeInStyleDicection(1.6, 'right')}>
                       <img src="/service/greenhouse-gases.jpg" alt="Air Pollution" className="rounded-2xl shadow-lg transform transition duration-300 hover:scale-105" />
                     </div>
                   </div>
